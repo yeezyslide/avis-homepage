@@ -85,13 +85,21 @@ h1, h2, h3, h4 { font-family: var(--font-headline); text-transform: uppercase; f
 }
 .nav-links a:hover { color: var(--white); }
 .nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  display: inline-flex; align-items: center; height: 34px; padding: 0 20px;
+  background: var(--red); color: var(--white); border-radius: var(--radius-xs);
+  font-family: var(--font-headline); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  transition: background 0.25s var(--ease);
+}
+.nav-cta:hover { background: var(--red-hover); }
 .nav-menu { display: none; width: 20px; height: 14px; flex-direction: column; justify-content: space-between; cursor: pointer; }
 .nav-menu span { display: block; height: 1.5px; background: var(--white); border-radius: 1px; transition: background 0.4s var(--ease); }
 .nav.scrolled .nav-menu span { background: var(--black); }
 
 /* ── 2. HERO ────────────────────────────────────────── */
 .hero {
-  position: relative; min-height: 100vh; display: flex; flex-direction: column;
+  position: relative; min-height: 85vh; display: flex; flex-direction: column;
   align-items: center; justify-content: center; text-align: center;
   padding: calc(var(--nav-h) + 48px) var(--px) 64px; overflow: hidden;
 }
@@ -224,28 +232,28 @@ h1, h2, h3, h4 { font-family: var(--font-headline); text-transform: uppercase; f
   font-size: 15px; color: var(--gray-400); max-width: 400px;
   margin: 0 auto 40px; line-height: 1.5;
 }
-.fleet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.fleet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .fleet-card {
   border-radius: var(--radius); overflow: hidden; background: var(--white);
   border: 1px solid var(--gray-100); cursor: pointer;
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease);
 }
-.fleet-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.fleet-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
 .fleet-card-img {
-  aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-.fleet-card-img svg { width: 48px; height: 48px; opacity: 0.15; transition: opacity 0.3s var(--ease); }
+.fleet-card-img svg { width: 64px; height: 64px; opacity: 0.15; transition: opacity 0.3s var(--ease); }
 .fleet-card:hover .fleet-card-img svg { opacity: 0.25; }
 .fleet-card:nth-child(1) .fleet-card-img { background: linear-gradient(145deg, #2a2a2a 0%, #3a3a3a 100%); }
 .fleet-card:nth-child(2) .fleet-card-img { background: linear-gradient(145deg, #1a2636 0%, #263a50 100%); }
 .fleet-card:nth-child(3) .fleet-card-img { background: linear-gradient(145deg, #3a1818 0%, #4d2222 100%); }
 .fleet-card:nth-child(4) .fleet-card-img { background: linear-gradient(145deg, #1a3020 0%, #264535 100%); }
-.fleet-card-body { padding: 16px; }
+.fleet-card-body { padding: 20px; }
 .fleet-card-title {
-  font-family: var(--font-headline); font-size: 15px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.3px; color: var(--black); margin-bottom: 2px;
+  font-family: var(--font-headline); font-size: 18px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.3px; color: var(--black); margin-bottom: 4px;
 }
-.fleet-card-meta { font-size: 13px; color: var(--gray-400); }
+.fleet-card-meta { font-size: 14px; color: var(--gray-400); }
 
 /* ── 5. AVIS FIRST ──────────────────────────────────── */
 .avis-first { padding: clamp(72px, 10vh, 120px) 0; background: var(--black); position: relative; overflow: hidden; }
@@ -296,36 +304,48 @@ h1, h2, h3, h4 { font-family: var(--font-headline); text-transform: uppercase; f
   color: var(--black); margin-bottom: 12px;
 }
 .deals-sub { font-size: 15px; color: var(--gray-400); margin: 0 auto 36px; }
+.deals-carousel { position: relative; }
 .deals-track {
-  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
-  scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px; cursor: grab;
+  display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px;
+  scroll-behavior: smooth;
 }
 .deals-track::-webkit-scrollbar { display: none; }
+.deals-arrows {
+  display: flex; gap: 8px; justify-content: center; margin-top: 24px;
+}
+.deals-arrow {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--gray-200);
+  background: var(--white); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.25s var(--ease); color: var(--black);
+}
+.deals-arrow:hover { border-color: var(--red); color: var(--red); background: rgba(212,0,42,0.04); }
+.deals-arrow svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .deal {
-  flex: 0 0 280px; scroll-snap-align: start; border-radius: var(--radius); overflow: hidden;
+  flex: 0 0 360px; scroll-snap-align: start; border-radius: var(--radius); overflow: hidden;
   background: var(--white); border: 1px solid var(--gray-100); cursor: pointer;
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease);
 }
-.deal:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
-.deal-img { height: 140px; position: relative; }
+.deal:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.deal-img { height: 200px; position: relative; }
 .deal:nth-child(1) .deal-img { background: linear-gradient(135deg, #D4002A, #7a0018); }
 .deal:nth-child(2) .deal-img { background: linear-gradient(135deg, #0D0D0B, #2a2a2a); }
 .deal:nth-child(3) .deal-img { background: linear-gradient(135deg, #1C3A56, #0f2236); }
 .deal:nth-child(4) .deal-img { background: linear-gradient(135deg, #3D2815, #5A3E20); }
 .deal-badge {
-  position: absolute; top: 12px; left: 12px; padding: 4px 10px;
+  position: absolute; top: 14px; left: 14px; padding: 5px 12px;
   background: var(--red); color: var(--white); border-radius: 100px;
-  font-family: var(--font-headline); font-size: 10px; font-weight: 700;
+  font-family: var(--font-headline); font-size: 11px; font-weight: 700;
   letter-spacing: 0.5px; text-transform: uppercase;
 }
-.deal-body { padding: 16px; text-align: left; }
+.deal-body { padding: 20px; text-align: left; }
 .deal-title {
-  font-family: var(--font-headline); font-size: 16px; font-weight: 700;
-  color: var(--black); margin-bottom: 6px; letter-spacing: -0.3px;
+  font-family: var(--font-headline); font-size: 19px; font-weight: 700;
+  color: var(--black); margin-bottom: 8px; letter-spacing: -0.3px;
 }
-.deal-desc { font-size: 13px; color: var(--gray-400); line-height: 1.5; margin-bottom: 12px; }
+.deal-desc { font-size: 14px; color: var(--gray-400); line-height: 1.55; margin-bottom: 14px; }
 .deal-link {
-  font-family: var(--font-headline); font-size: 12px; font-weight: 700;
+  font-family: var(--font-headline); font-size: 13px; font-weight: 700;
   letter-spacing: 0.5px; text-transform: uppercase; color: var(--red); transition: color 0.2s;
 }
 .deal:hover .deal-link { color: var(--red-hover); }
@@ -442,7 +462,6 @@ footer {
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 999px) {
-  .fleet-grid { grid-template-columns: repeat(2, 1fr); }
   .preferred .inner { flex-direction: column; text-align: center; }
   .preferred-img { flex: none; width: 100%; max-width: 340px; aspect-ratio: 3/4; }
   .preferred-text p { margin-left: auto; margin-right: auto; }
@@ -453,8 +472,10 @@ footer {
   .nav-menu { display: flex; }
   .booking-grid { grid-template-columns: 1fr; gap: 10px; }
   .features { grid-template-columns: 1fr; gap: 12px; }
-  .fleet-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .deal { flex: 0 0 240px; }
+  .fleet-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .deal { flex: 0 0 280px; }
+  .deal-img { height: 160px; }
+  .nav-cta { display: none; }
   .foot-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .foot-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .stats { gap: 40px; }
@@ -469,6 +490,7 @@ footer {
 }
 @media (max-width: 480px) {
   .fleet-grid { grid-template-columns: 1fr; }
+  .deal { flex: 0 0 260px; }
   .stats { flex-direction: column; gap: 20px; }
   .foot-grid { grid-template-columns: 1fr; }
 }
@@ -486,6 +508,7 @@ footer {
     <li><a href="#preferred">Preferred</a></li>
     <li><a href="#deals">Deals</a></li>
   </ul>
+  <a href="#hero" class="nav-cta">Reserve</a>
   <div class="nav-menu" id="menu"><span></span><span></span><span></span></div>
 </nav>
 
@@ -605,8 +628,8 @@ footer {
   <div class="inner">
     <h2 class="r">CURRENT DEALS</h2>
     <p class="deals-sub r rd1">Rotating carousel of current deals running for Avis.</p>
-    <div class="r rd2">
-      <div class="deals-track">
+    <div class="deals-carousel r rd2">
+      <div class="deals-track" id="dealsTrack">
         <div class="deal">
           <div class="deal-img"><span class="deal-badge">Limited Time</span></div>
           <div class="deal-body">
@@ -639,6 +662,10 @@ footer {
             <span class="deal-link">View Deal &rarr;</span>
           </div>
         </div>
+      </div>
+      <div class="deals-arrows">
+        <button class="deals-arrow" id="dealsPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="deals-arrow" id="dealsNext"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
       </div>
     </div>
   </div>
@@ -769,12 +796,13 @@ const stickyObs = new IntersectionObserver(entries => {
 }, { threshold: 0 });
 stickyObs.observe(heroBooking);
 
-const track = document.querySelector('.deals-track');
-let down = false, sx, sl;
-track.addEventListener('mousedown', e => { down = true; track.style.cursor = 'grabbing'; sx = e.pageX - track.offsetLeft; sl = track.scrollLeft; });
-track.addEventListener('mouseleave', () => { down = false; track.style.cursor = ''; });
-track.addEventListener('mouseup', () => { down = false; track.style.cursor = ''; });
-track.addEventListener('mousemove', e => { if (!down) return; e.preventDefault(); track.scrollLeft = sl - (e.pageX - track.offsetLeft - sx) * 1.5; });
+const dealsTrack = document.getElementById('dealsTrack');
+const dealsPrev = document.getElementById('dealsPrev');
+const dealsNext = document.getElementById('dealsNext');
+const dealCard = dealsTrack.querySelector('.deal');
+const scrollAmt = dealCard ? dealCard.offsetWidth + 20 : 380;
+dealsPrev.addEventListener('click', () => { dealsTrack.scrollBy({ left: -scrollAmt, behavior: 'smooth' }); });
+dealsNext.addEventListener('click', () => { dealsTrack.scrollBy({ left: scrollAmt, behavior: 'smooth' }); });
 </script>
 </body>
 </html>
