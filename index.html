@@ -133,6 +133,59 @@ h1, h2, h3, h4 { font-family: var(--font-headline); text-transform: uppercase; f
 }
 .btn-primary:hover { background: var(--red-hover); }
 
+/* ── STICKY BOOKING BAR ─────────────────────────────── */
+.sticky-book {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+  transform: translateY(100%); opacity: 0;
+  transition: transform 0.4s var(--ease-out), opacity 0.3s var(--ease);
+  pointer-events: none;
+}
+.sticky-book.show {
+  transform: translateY(0); opacity: 1; pointer-events: auto;
+}
+.sticky-book-inner {
+  max-width: var(--max-w); margin: 0 auto; padding: 0 var(--px);
+}
+.sticky-book-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: rgba(13,13,11,0.94);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0;
+}
+.sticky-book-bar .sb-field {
+  flex: 1; min-width: 0;
+}
+.sticky-book-bar .sb-field input {
+  width: 100%; padding: 8px 10px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; color: var(--white); font-size: 13px;
+  transition: border-color 0.2s var(--ease);
+}
+.sticky-book-bar .sb-field input::placeholder { color: rgba(255,255,255,0.3); }
+.sticky-book-bar .sb-field input:focus { border-color: var(--red); }
+.sticky-book-bar .sb-field label {
+  display: none;
+}
+.sticky-book-bar .sb-cta {
+  flex-shrink: 0; height: 36px; padding: 0 24px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--red); color: var(--white); border-radius: 2px;
+  font-family: var(--font-headline); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;
+  transition: background 0.2s var(--ease); cursor: pointer; border: none;
+}
+.sticky-book-bar .sb-cta:hover { background: var(--red-hover); }
+
+@media (max-width: 767px) {
+  .sticky-book-bar { flex-wrap: wrap; gap: 8px; padding: 12px 16px; }
+  .sticky-book-bar .sb-field { flex: 1 1 100%; }
+  .sticky-book-bar .sb-field:nth-child(2),
+  .sticky-book-bar .sb-field:nth-child(3) { flex: 1 1 calc(50% - 4px); }
+  .sticky-book-bar .sb-cta { width: 100%; }
+}
+
 /* ── 3. LOCATIONS ───────────────────────────────────── */
 .locations { padding: clamp(72px, 10vh, 120px) 0; background: var(--black); position: relative; }
 .locations .inner { text-align: center; }
@@ -621,6 +674,27 @@ footer {
   </div>
 </section>
 
+<!-- STICKY BOOKING BAR -->
+<div class="sticky-book" id="stickyBook">
+  <div class="sticky-book-inner">
+    <div class="sticky-book-bar">
+      <div class="sb-field">
+        <label>Location</label>
+        <input type="text" placeholder="Pickup location">
+      </div>
+      <div class="sb-field">
+        <label>Pickup</label>
+        <input type="text" placeholder="Pickup date">
+      </div>
+      <div class="sb-field">
+        <label>Return</label>
+        <input type="text" placeholder="Return date">
+      </div>
+      <button class="sb-cta">View Cars</button>
+    </div>
+  </div>
+</div>
+
 <!-- 10. FOOTER -->
 <footer>
   <div class="inner">
@@ -684,6 +758,16 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); } });
 }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+// ── Sticky booking bar (appears when hero form leaves viewport) ──
+const heroBooking = document.querySelector('.booking');
+const stickyBook = document.getElementById('stickyBook');
+const stickyObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    stickyBook.classList.toggle('show', !e.isIntersecting);
+  });
+}, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+stickyObs.observe(heroBooking);
 
 const track = document.querySelector('.deals-track');
 let down = false, sx, sl;
