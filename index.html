@@ -124,81 +124,99 @@ h1, h2, h3, h4 { font-family: var(--font-headline); text-transform: uppercase; f
   color: var(--white); margin-bottom: 16px;
 }
 .hero-sub {
-  font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.55);
-  max-width: 380px; margin: 0 auto 40px; line-height: 1.5;
+  font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.5);
+  max-width: 400px; margin: 0 auto 32px; line-height: 1.5;
 }
 
-/* Booking */
+/* Booking — compact bar */
 .booking {
-  position: relative; z-index: 1; width: 100%; max-width: 720px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px; padding: 28px; margin: 0 auto;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  position: relative; z-index: 1; width: 100%; max-width: 680px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius); padding: 6px; margin: 0 auto;
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
 }
-.booking-row { display: flex; gap: 12px; margin-bottom: 12px; }
-.booking-field { flex: 1; min-width: 0; }
+.booking-bar {
+  display: flex; align-items: stretch; gap: 1px;
+  background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); overflow: hidden;
+}
+.booking-field {
+  flex: 1; min-width: 0; padding: 12px 16px;
+  background: rgba(255,255,255,0.03); position: relative;
+  transition: background 0.2s var(--ease);
+}
+.booking-field:hover { background: rgba(255,255,255,0.06); }
 .booking-field label {
-  display: block; font-family: var(--font-headline); font-size: 11px; font-weight: 600;
-  letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px;
+  display: block; font-family: var(--font-headline); font-size: 10px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px;
 }
 .booking-field input, .booking-field select {
-  width: 100%; padding: 10px 12px; background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-xs);
-  color: var(--white); font-size: 14px; transition: border-color 0.25s var(--ease);
+  width: 100%; padding: 0; background: none; border: none;
+  color: var(--white); font-size: 13px; font-family: var(--font-body);
   -webkit-appearance: none; appearance: none;
 }
 .booking-field select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.35)' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 12px center;
-  padding-right: 32px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0 center;
+  padding-right: 16px; cursor: pointer;
 }
 .booking-field select option { background: #1a2a3a; color: var(--white); }
-.booking-field input::placeholder { color: rgba(255,255,255,0.25); }
-.booking-field input:focus, .booking-field select:focus { border-color: var(--red); outline: none; }
+.booking-field input::placeholder { color: rgba(255,255,255,0.2); font-size: 13px; }
+.booking-field input:focus, .booking-field select:focus { outline: none; }
+.booking-cta {
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  padding: 0 24px; background: var(--red); border: none; cursor: pointer;
+  transition: background 0.25s var(--ease);
+}
+.booking-cta:hover { background: var(--red-hover); }
+.booking-cta svg { width: 18px; height: 18px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Dropoff toggle */
+/* Booking expandable row */
+.booking-expand {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 8px 16px 4px; flex-wrap: wrap;
+}
 .booking-toggle {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 12px; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; cursor: pointer;
 }
 .booking-toggle-check {
-  width: 16px; height: 16px; border: 1px solid rgba(255,255,255,0.2); border-radius: 3px;
+  width: 14px; height: 14px; border: 1px solid rgba(255,255,255,0.18); border-radius: 3px;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.2s var(--ease); flex-shrink: 0;
 }
-.booking-toggle-check.active {
-  background: var(--red); border-color: var(--red);
-}
-.booking-toggle-check svg { width: 10px; height: 10px; stroke: var(--white); fill: none; stroke-width: 2.5; opacity: 0; transition: opacity 0.2s var(--ease); }
+.booking-toggle-check.active { background: var(--red); border-color: var(--red); }
+.booking-toggle-check svg { width: 9px; height: 9px; stroke: var(--white); fill: none; stroke-width: 2.5; opacity: 0; transition: opacity 0.2s var(--ease); }
 .booking-toggle-check.active svg { opacity: 1; }
 .booking-toggle span {
-  font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.45);
-  user-select: none;
+  font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.35); user-select: none;
 }
-.booking-dropoff { display: none; margin-bottom: 12px; }
-.booking-dropoff.show { display: block; }
-
-/* More options expandable */
 .booking-more-toggle {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  width: 100%; padding: 8px 0; margin-bottom: 0; cursor: pointer;
-  font-family: var(--font-headline); font-size: 12px; font-weight: 600;
-  letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.35);
-  transition: color 0.25s var(--ease); border: none; background: none;
+  display: flex; align-items: center; gap: 4px; cursor: pointer; border: none; background: none;
+  font-family: var(--font-headline); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,0.3);
+  transition: color 0.25s var(--ease); padding: 0;
 }
-.booking-more-toggle:hover { color: rgba(255,255,255,0.6); }
+.booking-more-toggle:hover { color: rgba(255,255,255,0.5); }
 .booking-more-toggle svg {
-  width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2;
+  width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2;
   transition: transform 0.3s var(--ease);
 }
 .booking-more-toggle.open svg { transform: rotate(180deg); }
-.booking-extras {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-  max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), margin 0.4s var(--ease);
-  margin-top: 0;
-}
-.booking-extras.open { max-height: 300px; margin-top: 12px; }
 
-.booking-actions { margin-top: 16px; }
+.booking-dropoff { display: none; width: 100%; padding: 0 16px 4px; }
+.booking-dropoff.show { display: block; }
+.booking-dropoff .booking-field {
+  padding: 10px 14px; background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-xs); border: 1px solid rgba(255,255,255,0.06);
+}
+.booking-extras {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; padding: 0 16px;
+  max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.4s var(--ease);
+}
+.booking-extras.open { max-height: 200px; padding: 4px 16px 8px; }
+.booking-extras .booking-field {
+  padding: 10px 14px; background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-xs); border: 1px solid rgba(255,255,255,0.06);
+}
 .btn-primary {
   width: 100%; height: 44px; display: flex; align-items: center; justify-content: center;
   background: var(--red); color: var(--white); border-radius: var(--radius-xs);
@@ -531,7 +549,8 @@ footer {
   :root { --nav-h: 48px; }
   .nav-links { display: none; }
   .nav-menu { display: flex; }
-  .booking-row { flex-direction: column; gap: 10px; }
+  .booking-bar { flex-direction: column; gap: 0; }
+  .booking-cta { padding: 14px; justify-content: center; }
   .booking-extras { grid-template-columns: 1fr; }
   .features { grid-template-columns: 1fr; gap: 12px; }
   .fleet-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -585,87 +604,73 @@ footer {
       <p class="hero-sub r rd1">For 80 years, we've focused on what our customers value the most. Reliability. Flexibility. Control. That's what keeps us and you moving forward.</p>
     </div>
     <div class="booking r rd2">
-      <!-- Pickup location -->
-      <div class="booking-row">
+      <div class="booking-bar">
         <div class="booking-field">
-          <label>Pickup Location</label>
-          <input type="text" placeholder="Enter pickup location or zip code">
+          <label>Location</label>
+          <input type="text" placeholder="City, airport, or zip code">
         </div>
-      </div>
-
-      <!-- Different drop-off toggle -->
-      <div class="booking-toggle" id="dropoffToggle">
-        <div class="booking-toggle-check" id="dropoffCheck">
-          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span>Different drop-off location</span>
-      </div>
-
-      <!-- Drop-off field (hidden by default) -->
-      <div class="booking-dropoff" id="dropoffField">
         <div class="booking-field">
-          <label>Drop-off Location</label>
-          <input type="text" placeholder="Enter drop-off location or zip code">
-        </div>
-      </div>
-
-      <!-- Date row -->
-      <div class="booking-row">
-        <div class="booking-field">
-          <label>Pickup Date & Time</label>
+          <label>Pickup</label>
           <input type="date">
         </div>
         <div class="booking-field">
-          <label>Return Date & Time</label>
+          <label>Return</label>
           <input type="date">
         </div>
+        <button class="booking-cta"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
       </div>
-
-      <!-- More options toggle -->
-      <button class="booking-more-toggle" id="moreToggle">
-        <span>Driver's age, discounts & more</span>
-        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-
-      <!-- Expandable extras -->
-      <div class="booking-extras" id="bookingExtras">
-        <div class="booking-field">
-          <label>Driver's Age</label>
-          <select>
-            <option value="25+">25+</option>
-            <option value="24">24</option>
-            <option value="23">23</option>
-            <option value="22">22</option>
-            <option value="21">21</option>
-            <option value="20">20</option>
-            <option value="18-19">18–19</option>
-          </select>
+      <div class="booking-expand">
+        <div class="booking-toggle" id="dropoffToggle">
+          <div class="booking-toggle-check" id="dropoffCheck">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Different drop-off</span>
         </div>
-        <div class="booking-field">
-          <label>Country of Residence</label>
-          <select>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="GB">United Kingdom</option>
-            <option value="DE">Germany</option>
-            <option value="FR">France</option>
-            <option value="AU">Australia</option>
-            <option value="JP">Japan</option>
-            <option value="other">Other</option>
-          </select>
+        <button class="booking-more-toggle" id="moreToggle">
+          <span>More options</span>
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="booking-dropoff" id="dropoffField">
+          <div class="booking-field">
+            <label>Drop-off Location</label>
+            <input type="text" placeholder="Enter drop-off location">
+          </div>
         </div>
-        <div class="booking-field">
-          <label>Avis Wizard Number</label>
-          <input type="text" placeholder="Enter Wizard #">
+        <div class="booking-extras" id="bookingExtras">
+          <div class="booking-field">
+            <label>Driver's Age</label>
+            <select>
+              <option value="25+">25+</option>
+              <option value="24">24</option>
+              <option value="23">23</option>
+              <option value="22">22</option>
+              <option value="21">21</option>
+              <option value="20">20</option>
+              <option value="18-19">18–19</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Residence</label>
+            <select>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="GB">United Kingdom</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="AU">Australia</option>
+              <option value="JP">Japan</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="booking-field">
+            <label>Wizard #</label>
+            <input type="text" placeholder="Enter number">
+          </div>
+          <div class="booking-field">
+            <label>Discount / AWD</label>
+            <input type="text" placeholder="Enter code">
+          </div>
         </div>
-        <div class="booking-field">
-          <label>Discount Code / AWD</label>
-          <input type="text" placeholder="Enter code">
-        </div>
-      </div>
-
-      <div class="booking-actions">
-        <button class="btn-primary">View Cars</button>
       </div>
     </div>
   </div>
